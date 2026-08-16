@@ -1,33 +1,16 @@
 {
-  "id": "/streaming-picker/",
-  "name": "Disney+ Streaming Picker",
-  "short_name": "Disney+ Picker",
-  "description": "Finde den perfekten Film oder die perfekte Serie auf Disney+ per Zufall.",
+  "name": "Disney Streaming Picker",
+  "short_name": "Disney Picker",
   "start_url": "/Disney-streaming-picker/index.html",
+  "scope": "/Disney-streaming-picker/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#08102b",
-  "theme_color": "#0078d4",
-  "categories": [
-    "entertainment",
-    "lifestyle",
-    "utilities"
-  ],
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/3172/3172555.png",
+      "src": "/Disney-streaming-picker/icon.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
-  ],
-  "screenshots": [
-    {
-      "src": "https://raw.githubusercontent.com/daviddoering07-cmd/Disney-streaming-picker/main/Screenshot%202026-08-16%20121559.png",
-      "sizes": "1919x915",
-      "type": "image/png",
-      "form_factor": "wide"
-    }
-  ],
-  "lang": "de"
+  ]
 }
