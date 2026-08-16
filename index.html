@@ -8,17 +8,18 @@
   <style>
     :root {
       --disney-dark: #040714;
-      --disney-card: #111b2e;
+      --disney-card: #0f172a;
       --disney-blue: #0078d4;
       --disney-hover: #008efb;
-      --disney-glow: rgba(0, 120, 212, 0.4);
+      --disney-glow: rgba(0, 120, 212, 0.35);
       --text-main: #f9f9f9;
-      --text-muted: #cacaca;
+      --text-muted: #94a3b8;
     }
     body {
       margin: 0;
       padding: 20px;
-      background: radial-gradient(circle at center top, #1a233a 0%, var(--disney-dark) 100%);
+      /* Echter Disney+ Hintergrund-Verlauf mit zentralem Lichtschein */
+      background: radial-gradient(circle at 50% 20%, #1e294b 0%, #0a1128 50%, var(--disney-dark) 100%);
       color: var(--text-main);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       display: flex;
@@ -40,7 +41,7 @@
       font-size: 28px;
       font-weight: 800;
       letter-spacing: 0.5px;
-      background: linear-gradient(90deg, #ffffff, #8ac7ff);
+      background: linear-gradient(90deg, #ffffff, #60a5fa);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -52,9 +53,9 @@
     .card {
       background-color: var(--disney-card);
       padding: 24px;
-      border-radius: 16px;
+      border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 120, 212, 0.15);
     }
     .form-group {
       margin-bottom: 20px;
@@ -72,8 +73,8 @@
       display: flex;
       background: #070b16;
       padding: 4px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
       gap: 4px;
     }
     .toggle-btn {
@@ -82,7 +83,7 @@
       background: transparent;
       color: var(--text-muted);
       border: none;
-      border-radius: 8px;
+      border-radius: 9px;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
@@ -107,20 +108,20 @@
     }
     input[type="text"]:focus {
       border-color: var(--disney-blue);
-      box-shadow: 0 0 8px var(--disney-glow);
+      box-shadow: 0 0 10px var(--disney-glow);
     }
     .suggestions-box {
       position: absolute;
       top: 100%;
       left: 0;
       right: 0;
-      background-color: #0d1424;
+      background-color: #0b132b;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 0 0 10px 10px;
       max-height: 180px;
       overflow-y: auto;
       z-index: 100;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
     }
     .suggestion-item {
       padding: 10px 14px;
@@ -135,15 +136,15 @@
     #drawBtn {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+      background: linear-gradient(135deg, #0078d4 0%, #004b87 100%);
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 15px;
       font-weight: bold;
       cursor: pointer;
       margin-top: 4px;
-      box-shadow: 0 4px 14px var(--disney-glow);
+      box-shadow: 0 4px 15px var(--disney-glow);
       transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
     }
     #drawBtn:hover {
@@ -158,9 +159,9 @@
       padding: 18px;
       background-color: #070b16;
       border: 1px solid var(--disney-blue);
-      border-radius: 12px;
+      border-radius: 14px;
       text-align: center;
-      box-shadow: 0 0 16px rgba(0, 120, 212, 0.2);
+      box-shadow: 0 0 20px rgba(0, 120, 212, 0.25);
       animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .hidden {
@@ -209,7 +210,7 @@
       background: linear-gradient(135deg, #0078d4 0%, #00d2d3 100%);
       color: white;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-weight: bold;
       font-size: 14px;
       border: none;
@@ -351,7 +352,7 @@
       const matches = allGenres.filter(g => g.toLowerCase().includes(query));
 
       if (matches.length === 0) {
-        suggestionsBox.innerHTML = '<div class="Suggestion-item" style="color: #cacaca; padding: 10px 14px;">Kein Genre gefunden</div>';
+        suggestionsBox.innerHTML = '<div class="suggestion-item" style="color: #94a3b8; padding: 10px 14px;">Kein Genre gefunden</div>';
         suggestionsBox.classList.remove('hidden');
         return;
       }
