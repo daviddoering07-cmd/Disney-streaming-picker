@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Disney+ Streaming Picker</title>
-  <!-- Web-Manifest inklusive deines echten Screenshots -->
-  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22%2Fstreaming-picker%2F%22%2C%22name%22%3A%22Disney%2B%20Streaming%20Picker%22%2C%22short_name%22%3A%22Disney%2B%20Picker%22%2C%22description%22%3A%22Finde%20den%20perfekten%20Film%20oder%20die%20perfekte%20Serie%20auf%20Disney%2B%20per%20Zufall.%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%2308102b%22%2C%22theme_color%22%3A%22%230078d4%22%2C%22categories%22%3A%5B%22entertainment%22%2C%22lifestyle%22%2C%22utilities%22%5D%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F3172%2F3172555.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%2C%22screenshots%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fgithub.com%2Fdaviddoering07-cmd%2FDisney-streaming-picker%2Fblob%2Fmain%2FScreenshot%25202026-08-16%2520121559.png%3Fraw%3Dtrue%22%2C%22sizes%22%3A%22440x900%22%2C%22type%22%3A%22image%2Fpng%22%2C%22form_factor%22%3A%22narrow%22%7D%5D%7D">
+  <!-- Manifest mit korrigiertem Raw-Link -->
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22%2Fstreaming-picker%2F%22%2C%22name%22%3A%22Disney%2B%20Streaming%20Picker%22%2C%22short_name%22%3A%22Disney%2B%20Picker%22%2C%22description%22%3A%22Finde%20den%20perfekten%20Film%20oder%20die%20perfekte%20Serie%20auf%20Disney%2B%20per%20Zufall.%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%2308102b%22%2C%22theme_color%22%3A%22%230078d4%22%2C%22categories%22%3A%5B%22entertainment%22%2C%22lifestyle%22%2C%22utilities%22%5D%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F3172%2F3172555.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%2C%22screenshots%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fdaviddoering07-cmd%2FDisney-streaming-picker%2Fmain%2FScreenshot%25202026-08-16%2520121559.png%22%2C%22sizes%22%3A%22440x900%22%2C%22type%22%3A%22image%2Fpng%22%2C%22form_factor%22%3A%22narrow%22%7D%5D%7D">
+  
   <style>
     :root {
       --disney-card: rgba(11, 18, 38, 0.85);
@@ -253,7 +254,6 @@
   </style>
 </head>
 <body>
-
   <div class="container">
     <header>
       <div class="disney-logo-container">
@@ -262,7 +262,6 @@
       </div>
       <p>Streaming Picker & Zufallsgenerator</p>
     </header>
-
     <main class="card">
       <div class="form-group">
         <label>1. WAS MÖCHTEST DU SCHAUEN?</label>
@@ -272,84 +271,64 @@
           <button type="button" class="toggle-btn" data-type="Serie">📺 Serie</button>
         </div>
       </div>
-
       <div class="form-group">
         <label for="genreSearch">2. GENRE SUCHEN & WÄHLEN</label>
         <input type="text" id="genreSearch" placeholder="🔍 Genre eintippen (z.B. Action, Sci-Fi)..." autocomplete="off" />
         <div id="genreSuggestions" class="suggestions-box hidden"></div>
       </div>
-
       <button id="drawBtn">🎲 Zufälligen Titel finden</button>
-
       <div id="resultContainer" class="result-box hidden">
         <span class="badge" id="resType">FILM</span>
         <h2 id="resTitle">Titel</h2>
         <p class="subtitle" id="resOriginal">Originaltitel</p>
-        
         <div class="meta-info">
           <p><strong>Studio / Reihe:</strong> <span id="resStudio">-</span></p>
           <p><strong>Genre:</strong> <span id="resGenre">-</span></p>
         </div>
-
         <a id="streamLink" href="#" class="stream-btn">
           ✨ In Disney+ App öffnen
         </a>
       </div>
     </main>
   </div>
-
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed:', err));
       });
     }
-
     const catalog = [
       {"Nr.":1,"Titel (Cover / Deutsch)":"Fast & Furious 7","Originaltitel / International":"Furious 7","Typ (Film / Serie)":"Film / Kurzfilm","Franchise / Studio":"Fast & Furious","Genre / Kategorie":"Action / Thriller","Quelle":"Screenshot 1"},
       {"Nr.":2,"Titel (Cover / Deutsch)":"Fast & Furious 9","Originaltitel / International":"F9: The Fast Saga","Typ (Film / Serie)":"Film / Kurzfilm","Franchise / Studio":"Fast & Furious","Genre / Kategorie":"Action / Thriller","Quelle":"Screenshot 1"}
     ];
-
     let selectedType = "Film";
     let selectedGenre = "ALL";
     let currentTitle = "";
-
     async function initApp() {
       try {
         const res = await fetch('catalog.json');
-        if (res.ok) {
-          window.fullCatalog = await res.json();
-        } else {
-          window.fullCatalog = catalog;
-        }
-      } catch(e) {
-        window.fullCatalog = catalog;
-      }
+        if (res.ok) { window.fullCatalog = await res.json(); } else { window.fullCatalog = catalog; }
+      } catch(e) { window.fullCatalog = catalog; }
     }
-
     document.querySelectorAll('.toggle-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
         selectedType = e.target.getAttribute('data-type');
-
         const drawBtn = document.getElementById('drawBtn');
         if (selectedType === 'Film') drawBtn.textContent = '🎲 Zufälligen Film finden';
         else if (selectedType === 'Serie') drawBtn.textContent = '🎲 Zufällige Serie finden';
         else drawBtn.textContent = '🎲 Zufallstitel ziehen';
-
         document.getElementById('genreSearch').value = '';
         selectedGenre = 'ALL';
       });
     });
-
     function getAvailableGenres() {
       const data = window.fullCatalog || catalog;
       const genreSet = new Set();
       data.forEach(item => {
         const itemType = item['Typ (Film / Serie)'] || '';
         const matchType = (selectedType === 'ALL') || itemType.includes(selectedType);
-
         if (matchType) {
           const rawGenre = item['Genre / Kategorie'];
           if (rawGenre) {
@@ -362,28 +341,22 @@
       });
       return Array.from(genreSet).sort();
     }
-
     const searchInput = document.getElementById('genreSearch');
     const suggestionsBox = document.getElementById('genreSuggestions');
-
     searchInput.addEventListener('input', (e) => {
       const query = e.target.value.toLowerCase();
       const allGenres = getAvailableGenres();
-      
       if (query.trim() === "") {
         selectedGenre = "ALL";
         suggestionsBox.classList.add('hidden');
         return;
       }
-
       const matches = allGenres.filter(g => g.toLowerCase().includes(query));
-
       if (matches.length === 0) {
         suggestionsBox.innerHTML = '<div class="suggestion-item" style="color: #94a3b8; padding: 10px 14px;">Kein Genre gefunden</div>';
         suggestionsBox.classList.remove('hidden');
         return;
       }
-
       suggestionsBox.innerHTML = '';
       const allOpt = document.createElement('div');
       allOpt.className = 'suggestion-item';
@@ -394,7 +367,6 @@
         suggestionsBox.classList.add('hidden');
       });
       suggestionsBox.appendChild(allOpt);
-
       matches.forEach(genre => {
         const div = document.createElement('div');
         div.className = 'suggestion-item';
@@ -406,68 +378,51 @@
         });
         suggestionsBox.appendChild(div);
       });
-
       suggestionsBox.classList.remove('hidden');
     });
-
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.form-group')) {
         suggestionsBox.classList.add('hidden');
       }
     });
-
     document.getElementById('drawBtn').addEventListener('click', () => {
       const data = window.fullCatalog || catalog;
-
       const filtered = data.filter(item => {
         const itemType = item['Typ (Film / Serie)'] || '';
         const itemGenre = item['Genre / Kategorie'] || '';
-
         const matchType = (selectedType === 'ALL') || itemType.includes(selectedType);
         const matchGenre = (selectedGenre === 'ALL') || itemGenre.includes(selectedGenre);
-
         return matchType && matchGenre;
       });
-
       const resultContainer = document.getElementById('resultContainer');
-
       if (filtered.length === 0) {
         alert('Keine Treffer für diese Kombination gefunden!');
         resultContainer.classList.add('hidden');
         return;
       }
-
       const pick = filtered[Math.floor(Math.random() * filtered.length)];
       currentTitle = pick['Titel (Cover / Deutsch)'] || pick['Filmtitel (Cover / Deutsch)'];
-
       document.getElementById('resType').textContent = (pick['Typ (Film / Serie)'] || 'TITEL').toUpperCase();
       document.getElementById('resTitle').textContent = currentTitle;
       document.getElementById('resOriginal').textContent = pick['Originaltitel / International'] ? `Original: ${pick['Originaltitel / International']}` : '';
       document.getElementById('resStudio').textContent = pick['Franchise / Studio'] || '-';
       document.getElementById('resGenre').textContent = pick['Genre / Kategorie'] || '-';
-
       resultContainer.classList.remove('hidden');
     });
-
     document.getElementById('streamLink').addEventListener('click', function(e) {
       if (!currentTitle) return;
-
       const encoded = encodeURIComponent(currentTitle);
       const appSchemeUrl = `disneyplus://search?q=${encoded}`;
       const webUrl = `https://www.disneyplus.com/search?q=${encoded}`;
-
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       if (isMobile) {
         e.preventDefault();
         window.location.href = appSchemeUrl;
-        setTimeout(() => {
-          window.location.href = webUrl;
-        }, 1200);
+        setTimeout(() => { window.location.href = webUrl; }, 1200);
       } else {
         this.href = webUrl;
       }
     });
-
     initApp();
   </script>
 </body>
