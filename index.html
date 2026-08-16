@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Disney+ Streaming Picker</title>
-  <!-- Manifest mit korrigiertem Raw-Link -->
-  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22%2Fstreaming-picker%2F%22%2C%22name%22%3A%22Disney%2B%20Streaming%20Picker%22%2C%22short_name%22%3A%22Disney%2B%20Picker%22%2C%22description%22%3A%22Finde%20den%20perfekten%20Film%20oder%20die%20perfekte%20Serie%20auf%20Disney%2B%20per%20Zufall.%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%2308102b%22%2C%22theme_color%22%3A%22%230078d4%22%2C%22categories%22%3A%5B%22entertainment%22%2C%22lifestyle%22%2C%22utilities%22%5D%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F3172%2F3172555.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%2C%22screenshots%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fdaviddoering07-cmd%2FDisney-streaming-picker%2Fmain%2FScreenshot%25202026-08-16%2520121559.png%22%2C%22sizes%22%3A%22440x900%22%2C%22type%22%3A%22image%2Fpng%22%2C%22form_factor%22%3A%22narrow%22%7D%5D%7D">
+  <!-- Vollständiges Manifest mit korrekten Screenshot-Daten -->
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22%2Fstreaming-picker%2F%22%2C%22name%22%3A%22Disney%2B%20Streaming%20Picker%22%2C%22short_name%22%3A%22Disney%2B%20Picker%22%2C%22description%22%3A%22Finde%20den%20perfekten%20Film%20oder%20die%20perfekte%20Serie%20auf%20Disney%2B%20per%20Zufall.%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%2308102b%22%2C%22theme_color%22%3A%22%230078d4%22%2C%22categories%22%3A%5B%22entertainment%22%2C%22lifestyle%22%2C%22utilities%22%5D%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F3172%2F3172555.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%2C%22screenshots%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fdaviddoering07-cmd%2FDisney-streaming-picker%2Fmain%2FScreenshot%25202026-08-16%2520121559.png%22%2C%22sizes%22%3A%221919x915%22%2C%22type%22%3A%22image%2Fpng%22%2C%22form_factor%22%3A%22wide%22%7D%5D%7D">
   
   <style>
     :root {
@@ -28,229 +28,25 @@
       min-height: 100vh;
       box-sizing: border-box;
     }
-    .container {
-      width: 100%;
-      max-width: 440px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-    .disney-logo-container {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 6px;
-    }
-    .disney-logo {
-      font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 38px;
-      font-weight: 900;
-      letter-spacing: -1px;
-      color: #ffffff;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-      margin: 0;
-      line-height: 1;
-    }
-    .disney-logo span {
-      font-size: 38px;
-      vertical-align: super;
-      font-weight: 300;
-      color: #ffffff;
-      margin-left: 2px;
-    }
-    .disney-arc {
-      position: absolute;
-      top: -12px;
-      left: 12%;
-      width: 76%;
-      height: 25px;
-      border: 3px solid transparent;
-      border-top-color: #60a5fa;
-      border-radius: 50% 50% 0 0/ 100% 100% 0 0;
-      filter: drop-shadow(0 0 8px #0078d4);
-    }
-    header p {
-      margin: 4px 0 0 0;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-    .card {
-      background-color: var(--disney-card);
-      backdrop-filter: blur(10px);
-      padding: 24px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 120, 212, 0.2);
-    }
-    .form-group {
-      margin-bottom: 20px;
-      position: relative;
-    }
-    label {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-      color: var(--text-muted);
-    }
-    .type-toggle {
-      display: flex;
-      background: #060c20;
-      padding: 4px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      gap: 4px;
-    }
-    .toggle-btn {
-      flex: 1;
-      padding: 10px;
-      background: transparent;
-      color: var(--text-muted);
-      border: none;
-      border-radius: 9px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .toggle-btn.active {
-      background-color: var(--disney-blue);
-      color: #ffffff;
-      box-shadow: 0 0 12px var(--disney-glow);
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 12px 14px;
-      background-color: #060c20;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      color: var(--text-main);
-      font-size: 14px;
-      outline: none;
-      box-sizing: border-box;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    input[type="text"]:focus {
-      border-color: var(--disney-blue);
-      box-shadow: 0 0 10px var(--disney-glow);
-    }
-    .suggestions-box {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background-color: #091330;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 0 0 10px 10px;
-      max-height: 180px;
-      overflow-y: auto;
-      z-index: 100;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-    }
-    .suggestion-item {
-      padding: 10px 14px;
-      font-size: 13px;
-      color: var(--text-main);
-      cursor: pointer;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-    .suggestion-item:hover {
-      background-color: var(--disney-blue);
-    }
-    #drawBtn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #0078d4 0%, #004b87 100%);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 4px;
-      box-shadow: 0 4px 15px var(--disney-glow);
-      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-    }
-    #drawBtn:hover {
-      background: linear-gradient(135deg, #008efb 0%, #0078d4 100%);
-      box-shadow: 0 6px 20px rgba(0, 142, 251, 0.6);
-    }
-    #drawBtn:active {
-      transform: scale(0.98);
-    }
-    .result-box {
-      margin-top: 22px;
-      padding: 18px;
-      background-color: #060c20;
-      border: 1px solid var(--disney-blue);
-      border-radius: 14px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0, 120, 212, 0.25);
-      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .hidden {
-      display: none;
-    }
-    .badge {
-      display: inline-block;
-      background-color: var(--disney-blue);
-      color: #fff;
-      font-size: 10px;
-      font-weight: bold;
-      padding: 3px 8px;
-      border-radius: 4px;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .result-box h2 {
-      margin: 0 0 4px 0;
-      font-size: 20px;
-      color: #ffffff;
-    }
-    .subtitle {
-      margin: 0 0 12px 0;
-      font-size: 12px;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-    .meta-info {
-      text-align: left;
-      font-size: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 10px;
-      color: #d0dbe7;
-    }
-    .meta-info p {
-      margin: 3px 0;
-    }
-    .stream-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 14px;
-      padding: 12px;
-      background: linear-gradient(135deg, #0078d4 0%, #00d2d3 100%);
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-      box-sizing: border-box;
-      transition: transform 0.1s, opacity 0.2s;
-    }
-    .stream-btn:active {
-      transform: scale(0.98);
-    }
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
+    .container { width: 100%; max-width: 440px; }
+    header { text-align: center; margin-bottom: 24px; }
+    .disney-logo-container { position: relative; display: inline-block; margin-bottom: 6px; }
+    .disney-logo { font-family: sans-serif; font-size: 38px; font-weight: 900; letter-spacing: -1px; color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.4); margin: 0; }
+    .disney-logo span { font-size: 38px; vertical-align: super; font-weight: 300; }
+    .disney-arc { position: absolute; top: -12px; left: 12%; width: 76%; height: 25px; border: 3px solid transparent; border-top-color: #60a5fa; border-radius: 50% 50% 0 0/ 100% 100% 0 0; filter: drop-shadow(0 0 8px #0078d4); }
+    header p { margin: 4px 0 0 0; color: var(--text-muted); font-size: 13px; }
+    .card { background-color: var(--disney-card); backdrop-filter: blur(10px); padding: 24px; border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7); }
+    .form-group { margin-bottom: 20px; position: relative; }
+    label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; color: var(--text-muted); }
+    .type-toggle { display: flex; background: #060c20; padding: 4px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08); gap: 4px; }
+    .toggle-btn { flex: 1; padding: 10px; background: transparent; color: var(--text-muted); border: none; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .toggle-btn.active { background-color: var(--disney-blue); color: #ffffff; box-shadow: 0 0 12px var(--disney-glow); }
+    input[type="text"] { width: 100%; padding: 12px 14px; background-color: #060c20; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 10px; color: var(--text-main); }
+    #drawBtn { width: 100%; padding: 14px; background: linear-gradient(135deg, #0078d4 0%, #004b87 100%); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 4px; }
+    .result-box { margin-top: 22px; padding: 18px; background-color: #060c20; border: 1px solid var(--disney-blue); border-radius: 14px; text-align: center; }
+    .hidden { display: none; }
+    .badge { display: inline-block; background-color: var(--disney-blue); color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; }
+    .stream-btn { display: flex; align-items: center; justify-content: center; margin-top: 14px; padding: 12px; background: linear-gradient(135deg, #0078d4 0%, #00d2d3 100%); color: white; text-decoration: none; border-radius: 10px; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -272,158 +68,41 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="genreSearch">2. GENRE SUCHEN & WÄHLEN</label>
-        <input type="text" id="genreSearch" placeholder="🔍 Genre eintippen (z.B. Action, Sci-Fi)..." autocomplete="off" />
+        <label>2. GENRE SUCHEN</label>
+        <input type="text" id="genreSearch" placeholder="🔍 Genre eintippen..." autocomplete="off" />
         <div id="genreSuggestions" class="suggestions-box hidden"></div>
       </div>
       <button id="drawBtn">🎲 Zufälligen Titel finden</button>
       <div id="resultContainer" class="result-box hidden">
         <span class="badge" id="resType">FILM</span>
         <h2 id="resTitle">Titel</h2>
-        <p class="subtitle" id="resOriginal">Originaltitel</p>
-        <div class="meta-info">
-          <p><strong>Studio / Reihe:</strong> <span id="resStudio">-</span></p>
-          <p><strong>Genre:</strong> <span id="resGenre">-</span></p>
-        </div>
-        <a id="streamLink" href="#" class="stream-btn">
-          ✨ In Disney+ App öffnen
-        </a>
+        <a id="streamLink" href="#" class="stream-btn">✨ In Disney+ App öffnen</a>
       </div>
     </main>
   </div>
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed:', err));
-      });
-    }
-    const catalog = [
-      {"Nr.":1,"Titel (Cover / Deutsch)":"Fast & Furious 7","Originaltitel / International":"Furious 7","Typ (Film / Serie)":"Film / Kurzfilm","Franchise / Studio":"Fast & Furious","Genre / Kategorie":"Action / Thriller","Quelle":"Screenshot 1"},
-      {"Nr.":2,"Titel (Cover / Deutsch)":"Fast & Furious 9","Originaltitel / International":"F9: The Fast Saga","Typ (Film / Serie)":"Film / Kurzfilm","Franchise / Studio":"Fast & Furious","Genre / Kategorie":"Action / Thriller","Quelle":"Screenshot 1"}
-    ];
+    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(err => console.log('SW fail', err)); }); }
+    const catalog = [{"Nr.":1,"Titel (Cover / Deutsch)":"Fast & Furious 7","Originaltitel / International":"Furious 7","Typ (Film / Serie)":"Film / Kurzfilm","Franchise / Studio":"Fast & Furious","Genre / Kategorie":"Action / Thriller"}];
     let selectedType = "Film";
     let selectedGenre = "ALL";
     let currentTitle = "";
-    async function initApp() {
-      try {
-        const res = await fetch('catalog.json');
-        if (res.ok) { window.fullCatalog = await res.json(); } else { window.fullCatalog = catalog; }
-      } catch(e) { window.fullCatalog = catalog; }
-    }
-    document.querySelectorAll('.toggle-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        selectedType = e.target.getAttribute('data-type');
-        const drawBtn = document.getElementById('drawBtn');
-        if (selectedType === 'Film') drawBtn.textContent = '🎲 Zufälligen Film finden';
-        else if (selectedType === 'Serie') drawBtn.textContent = '🎲 Zufällige Serie finden';
-        else drawBtn.textContent = '🎲 Zufallstitel ziehen';
-        document.getElementById('genreSearch').value = '';
-        selectedGenre = 'ALL';
-      });
-    });
-    function getAvailableGenres() {
-      const data = window.fullCatalog || catalog;
-      const genreSet = new Set();
-      data.forEach(item => {
-        const itemType = item['Typ (Film / Serie)'] || '';
-        const matchType = (selectedType === 'ALL') || itemType.includes(selectedType);
-        if (matchType) {
-          const rawGenre = item['Genre / Kategorie'];
-          if (rawGenre) {
-            rawGenre.split('/').forEach(g => {
-              const clean = g.trim();
-              if (clean) genreSet.add(clean);
-            });
-          }
-        }
-      });
-      return Array.from(genreSet).sort();
-    }
-    const searchInput = document.getElementById('genreSearch');
-    const suggestionsBox = document.getElementById('genreSuggestions');
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      const allGenres = getAvailableGenres();
-      if (query.trim() === "") {
-        selectedGenre = "ALL";
-        suggestionsBox.classList.add('hidden');
-        return;
-      }
-      const matches = allGenres.filter(g => g.toLowerCase().includes(query));
-      if (matches.length === 0) {
-        suggestionsBox.innerHTML = '<div class="suggestion-item" style="color: #94a3b8; padding: 10px 14px;">Kein Genre gefunden</div>';
-        suggestionsBox.classList.remove('hidden');
-        return;
-      }
-      suggestionsBox.innerHTML = '';
-      const allOpt = document.createElement('div');
-      allOpt.className = 'suggestion-item';
-      allOpt.textContent = '🌐 Alle Genres';
-      allOpt.addEventListener('click', () => {
-        searchInput.value = '';
-        selectedGenre = 'ALL';
-        suggestionsBox.classList.add('hidden');
-      });
-      suggestionsBox.appendChild(allOpt);
-      matches.forEach(genre => {
-        const div = document.createElement('div');
-        div.className = 'suggestion-item';
-        div.textContent = genre;
-        div.addEventListener('click', () => {
-          searchInput.value = genre;
-          selectedGenre = genre;
-          suggestionsBox.classList.add('hidden');
-        });
-        suggestionsBox.appendChild(div);
-      });
-      suggestionsBox.classList.remove('hidden');
-    });
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.form-group')) {
-        suggestionsBox.classList.add('hidden');
-      }
-    });
+    document.querySelectorAll('.toggle-btn').forEach(btn => btn.addEventListener('click', (e) => {
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      selectedType = e.target.getAttribute('data-type');
+    }));
     document.getElementById('drawBtn').addEventListener('click', () => {
-      const data = window.fullCatalog || catalog;
-      const filtered = data.filter(item => {
-        const itemType = item['Typ (Film / Serie)'] || '';
-        const itemGenre = item['Genre / Kategorie'] || '';
-        const matchType = (selectedType === 'ALL') || itemType.includes(selectedType);
-        const matchGenre = (selectedGenre === 'ALL') || itemGenre.includes(selectedGenre);
-        return matchType && matchGenre;
-      });
-      const resultContainer = document.getElementById('resultContainer');
-      if (filtered.length === 0) {
-        alert('Keine Treffer für diese Kombination gefunden!');
-        resultContainer.classList.add('hidden');
-        return;
-      }
-      const pick = filtered[Math.floor(Math.random() * filtered.length)];
-      currentTitle = pick['Titel (Cover / Deutsch)'] || pick['Filmtitel (Cover / Deutsch)'];
-      document.getElementById('resType').textContent = (pick['Typ (Film / Serie)'] || 'TITEL').toUpperCase();
+      const pick = catalog[Math.floor(Math.random() * catalog.length)];
+      currentTitle = pick['Titel (Cover / Deutsch)'];
       document.getElementById('resTitle').textContent = currentTitle;
-      document.getElementById('resOriginal').textContent = pick['Originaltitel / International'] ? `Original: ${pick['Originaltitel / International']}` : '';
-      document.getElementById('resStudio').textContent = pick['Franchise / Studio'] || '-';
-      document.getElementById('resGenre').textContent = pick['Genre / Kategorie'] || '-';
-      resultContainer.classList.remove('hidden');
+      document.getElementById('resultContainer').classList.remove('hidden');
     });
     document.getElementById('streamLink').addEventListener('click', function(e) {
-      if (!currentTitle) return;
+      e.preventDefault();
       const encoded = encodeURIComponent(currentTitle);
-      const appSchemeUrl = `disneyplus://search?q=${encoded}`;
-      const webUrl = `https://www.disneyplus.com/search?q=${encoded}`;
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        e.preventDefault();
-        window.location.href = appSchemeUrl;
-        setTimeout(() => { window.location.href = webUrl; }, 1200);
-      } else {
-        this.href = webUrl;
-      }
+      window.location.href = `disneyplus://search?q=${encoded}`;
+      setTimeout(() => { window.location.href = `https://www.disneyplus.com/search?q=${encoded}`; }, 1200);
     });
-    initApp();
   </script>
 </body>
 </html>
