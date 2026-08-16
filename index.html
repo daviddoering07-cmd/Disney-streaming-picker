@@ -6,12 +6,10 @@
   <title>Disney+ Streaming Picker</title>
   <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22%2Fstreaming-picker%2F%22%2C%22name%22%3A%22Disney%2B%20Streaming%20Picker%22%2C%22short_name%22%3A%22Disney%2B%20Picker%22%2C%22description%22%3A%22Finde%20den%20perfekten%20Film%20oder%20die%20perfekte%20Serie%20auf%20Disney%2B%20per%20Zufall.%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%2308102b%22%2C%22theme_color%22%3A%22%230078d4%22%2C%22categories%22%3A%5B%22entertainment%22%2C%22lifestyle%22%2C%22utilities%22%5D%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F3172%2F3172555.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%2C%22screenshots%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fdaviddoering07-cmd%2FDisney-streaming-picker%2Fmain%2FScreenshot%25202026-08-16%2520121559.png%22%2C%22sizes%22%3A%221919x915%22%2C%22type%22%3A%22image%2Fpng%22%2C%22form_factor%22%3A%22wide%22%7D%5D%7D">
   <style>
-    :root { --disney-card: rgba(11, 18, 38, 0.85); --disney-blue: #0078d4; --disney-glow: rgba(0, 120, 212, 0.4); --text-main: #f9f9f9; --text-muted: #94a3b8; }
-    body { margin: 0; padding: 20px; background: linear-gradient(180deg, #12214e 0%, #0c1738 40%, #060c20 80%, #030612 100%); background-attachment: fixed; color: var(--text-main); font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; }
+    :root { --disney-card: rgba(11, 18, 38, 0.85); --disney-blue: #0078d4; --text-main: #f9f9f9; --text-muted: #94a3b8; }
+    body { margin: 0; padding: 20px; background: linear-gradient(180deg, #12214e 0%, #0c1738 40%, #060c20 80%, #030612 100%); background-attachment: fixed; color: var(--text-main); font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
     .container { width: 100%; max-width: 440px; }
-    header { text-align: center; margin-bottom: 24px; }
-    .disney-logo { font-size: 38px; font-weight: 900; color: #fff; margin: 0; }
-    .card { background-color: var(--disney-card); padding: 24px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.7); }
+    .card { background-color: var(--disney-card); padding: 24px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.1); }
     .type-toggle { display: flex; background: #060c20; padding: 4px; border-radius: 12px; gap: 4px; margin-bottom: 20px; }
     .toggle-btn { flex: 1; padding: 10px; background: transparent; color: var(--text-muted); border: none; border-radius: 9px; cursor: pointer; }
     .toggle-btn.active { background-color: var(--disney-blue); color: #fff; }
@@ -19,43 +17,56 @@
     #drawBtn { width: 100%; padding: 14px; background: #0078d4; color: #fff; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; }
     .result-box { margin-top: 20px; padding: 18px; background: #060c20; border: 1px solid #0078d4; border-radius: 14px; text-align: center; }
     .hidden { display: none; }
-    .stream-btn { display: block; margin-top: 14px; padding: 12px; background: #0078d4; color: #fff; text-decoration: none; border-radius: 10px; font-weight: bold; }
+    .suggestions { background: #060c20; border: 1px solid #334; max-height: 150px; overflow-y: auto; margin-top: 5px; }
+    .item { padding: 10px; cursor: pointer; }
+    .item:hover { background: #0078d4; }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1 class="disney-logo">Disney+</h1>
-      <p>Streaming Picker</p>
-    </header>
     <main class="card">
       <div class="type-toggle">
-        <button class="toggle-btn active" data-type="Film">Film</button>
+        <button class="toggle-btn" data-type="Film">Film</button>
         <button class="toggle-btn" data-type="Serie">Serie</button>
       </div>
       <input type="text" id="genreSearch" placeholder="🔍 Genre suchen...">
+      <div id="suggestions" class="suggestions hidden"></div>
       <button id="drawBtn">Zufälligen Titel finden</button>
-      <div id="resultContainer" class="result-box hidden">
-        <h2 id="resTitle">Titel</h2>
-        <a id="streamLink" href="#" class="stream-btn">In Disney+ öffnen</a>
-      </div>
+      <div id="result" class="result-box hidden"><h2 id="resTitle"></h2><a id="streamLink" href="#">In Disney+ öffnen</a></div>
     </main>
   </div>
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(err => console.log('SW fail', err));
-    }
-    const catalog = [{"Titel (Cover / Deutsch)":"Fast & Furious 7"},{"Titel (Cover / Deutsch)":"Fast & Furious 9"}];
-    document.getElementById('drawBtn').addEventListener('click', () => {
-      const pick = catalog[Math.floor(Math.random() * catalog.length)];
-      document.getElementById('resTitle').textContent = pick['Titel (Cover / Deutsch)'];
-      document.getElementById('resultContainer').classList.remove('hidden');
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+    const catalog = [
+      {"Titel":"Fast & Furious 7","Typ":"Film","Genre":"Action"},
+      {"Titel":"Loki","Typ":"Serie","Genre":"Sci-Fi"}
+    ];
+    let type = "Film";
+    document.querySelectorAll('.toggle-btn').forEach(b => b.addEventListener('click', (e) => {
+      document.querySelectorAll('.toggle-btn').forEach(x => x.classList.remove('active'));
+      e.target.classList.add('active');
+      type = e.target.dataset.type;
+    }));
+    document.getElementById('genreSearch').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      const sug = document.getElementById('suggestions');
+      sug.innerHTML = '';
+      const matches = catalog.filter(i => i.Genre.toLowerCase().includes(q));
+      matches.forEach(m => {
+        const div = document.createElement('div');
+        div.className = 'item'; div.textContent = m.Genre;
+        div.onclick = () => { document.getElementById('genreSearch').value = m.Genre; sug.classList.add('hidden'); };
+        sug.appendChild(div);
+      });
+      sug.classList.remove('hidden');
     });
-    document.getElementById('streamLink').addEventListener('click', (e) => {
-      e.preventDefault();
-      const title = document.getElementById('resTitle').textContent;
-      window.location.href = `disneyplus://search?q=${encodeURIComponent(title)}`;
-      setTimeout(() => { window.location.href = `https://www.disneyplus.com/search?q=${encodeURIComponent(title)}`; }, 1200);
+    document.getElementById('drawBtn').addEventListener('click', () => {
+      const filtered = catalog.filter(i => i.Typ === type);
+      const pick = filtered[Math.floor(Math.random() * filtered.length)];
+      if(pick) {
+        document.getElementById('resTitle').textContent = pick.Titel;
+        document.getElementById('result').classList.remove('hidden');
+      }
     });
   </script>
 </body>
