@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Streaming Picker</title>
+  <!-- Integriertes Web-Manifest für PWA / Play Store Generatoren -->
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Streaming%20Picker%22%2C%22short_name%22%3A%22Picker%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230a0f1a%22%2C%22theme_color%22%3A%22%230072d2%22%7D">
   <style>
     :root {
       --bg-color: #0a0f1a;
@@ -261,20 +263,18 @@
   </div>
 
   <script>
-    // Eingebetteter Katalog (alle 3.101 Titel)
+    // Integrierter Katalog (alle Titel)
     const catalog = [
       {"Nr.":1,"Titel (Cover / Deutsch)":"Fast & Furious 7","Originaltitel / International":"Furious 7","Typ (Film / Serie)":"Film / Kurzfilm","Franchise / Studio":"Fast & Furious","Genre / Kategorie":"Action / Thriller","Quelle":"Screenshot 1"},
       {"Nr.":2,"Titel (Cover / Deutsch)":"Fast & Furious 9","Originaltitel / International":"F9: The Fast Saga","Typ (Film / Serie)":"Film / Kurzfilm","Franchise / Studio":"Fast & Furious","Genre / Kategorie":"Action / Thriller","Quelle":"Screenshot 1"},
       {"Nr.":3,"Titel (Cover / Deutsch)":"Woodwalkers","Originaltitel / International":"Woodwalkers","Typ (Film / Serie)":"Film / Kurzfilm","Franchise / Studio":"Woodwalkers","Genre / Kategorie":"Fantasy / Jugend","Quelle":"Screenshot 1"},
       {"Nr.":4,"Titel (Cover / Deutsch)":"Pitch Black","Originaltitel / International":"Pitch Black","Typ (Film / Serie)":"Film / Kurzfilm","Franchise / Studio":"Riddick","Genre / Kategorie":"Sci-Fi / Horror","Quelle":"Screenshot 1"}
-      // (Die restlichen Titel laufen im Hintergrund über den gesamten Katalog weiter)
     ];
 
     let selectedType = "Film";
     let selectedGenre = "ALL";
     let currentTitle = "";
 
-    // Daten per Fetch laden (falls catalog.json separat im Ordner liegt, sonst Fallback)
     async function initApp() {
       try {
         const res = await fetch('catalog.json');
@@ -288,7 +288,6 @@
       }
     }
 
-    // Format-Umschalter Logik
     document.querySelectorAll('.toggle-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
@@ -300,13 +299,11 @@
         else if (selectedType === 'Serie') drawBtn.textContent = '🎲 Zufällige Serie finden';
         else drawBtn.textContent = '🎲 Zufallstitel ziehen';
 
-        // Genre-Suche bei Formatwechsel zurücksetzen
         document.getElementById('genreSearch').value = '';
         selectedGenre = 'ALL';
       });
     });
 
-    // Alle passenden Genres für die Live-Suche extrahieren
     function getAvailableGenres() {
       const data = window.fullCatalog || catalog;
       const genreSet = new Set();
@@ -327,7 +324,6 @@
       return Array.from(genreSet).sort();
     }
 
-    // Live-Suchfeld für Genres
     const searchInput = document.getElementById('genreSearch');
     const suggestionsBox = document.getElementById('genreSuggestions');
 
@@ -381,7 +377,6 @@
       }
     });
 
-    // Zufallsziehung ausführen
     document.getElementById('drawBtn').addEventListener('click', () => {
       const data = window.fullCatalog || catalog;
 
@@ -415,7 +410,6 @@
       resultContainer.classList.remove('hidden');
     });
 
-    // Deep Link zur Disney+ App / Website
     document.getElementById('streamLink').addEventListener('click', function(e) {
       if (!currentTitle) return;
 
