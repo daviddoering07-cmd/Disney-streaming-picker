@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Disney+ Streaming Picker</title>
-  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22%2Fstreaming-picker%2F%22%2C%22name%22%3A%22Disney%2B%20Streaming%20Picker%22%2C%22short_name%22%3A%22Disney%2B%20Picker%22%2C%22description%22%3A%22Finde%20den%20perfekten%20Film%20oder%20die%20perfekte%20Serie%20auf%20Disney%2B%20per%20Zufall.%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%2308102b%22%2C%22theme_color%22%3A%22%230078d4%22%2C%22categories%22%3A%5B%22entertainment%22%2C%22lifestyle%22%2C%22utilities%22%5D%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F3172%2F3172555.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+  <!-- Web-Manifest inklusive deines echten Screenshots -->
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22%2Fstreaming-picker%2F%22%2C%22name%22%3A%22Disney%2B%20Streaming%20Picker%22%2C%22short_name%22%3A%22Disney%2B%20Picker%22%2C%22description%22%3A%22Finde%20den%20perfekten%20Film%20oder%20die%20perfekte%20Serie%20auf%20Disney%2B%20per%20Zufall.%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%2308102b%22%2C%22theme_color%22%3A%22%230078d4%22%2C%22categories%22%3A%5B%22entertainment%22%2C%22lifestyle%22%2C%22utilities%22%5D%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F3172%2F3172555.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%2C%22screenshots%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fgithub.com%2Fdaviddoering07-cmd%2FDisney-streaming-picker%2Fblob%2Fmain%2FScreenshot%25202026-08-16%2520121559.png%3Fraw%3Dtrue%22%2C%22sizes%22%3A%22440x900%22%2C%22type%22%3A%22image%2Fpng%22%2C%22form_factor%22%3A%22narrow%22%7D%5D%7D">
   <style>
     :root {
       --disney-card: rgba(11, 18, 38, 0.85);
@@ -34,8 +35,6 @@
       text-align: center;
       margin-bottom: 24px;
     }
-    
-    /* Original Disney+ Logo Styling */
     .disney-logo-container {
       position: relative;
       display: inline-block;
@@ -58,7 +57,6 @@
       color: #ffffff;
       margin-left: 2px;
     }
-    /* Der geschwungene Bogen über dem Logo */
     .disney-arc {
       position: absolute;
       top: -12px;
@@ -70,7 +68,6 @@
       border-radius: 50% 50% 0 0/ 100% 100% 0 0;
       filter: drop-shadow(0 0 8px #0078d4);
     }
-
     header p {
       margin: 4px 0 0 0;
       color: var(--text-muted);
@@ -423,7 +420,7 @@
       const data = window.fullCatalog || catalog;
 
       const filtered = data.filter(item => {
-        const itemType = item['Typ (Film / Serie)']  || '';
+        const itemType = item['Typ (Film / Serie)'] || '';
         const itemGenre = item['Genre / Kategorie'] || '';
 
         const matchType = (selectedType === 'ALL') || itemType.includes(selectedType);
