@@ -1,7 +1,8 @@
 const CACHE_NAME = 'disney-picker-v2';
 const ASSETS = [
   './index.html',
-  './catalog.json'
+  './catalog.json',
+  './'
 ];
 
 self.addEventListener('install', (event) => {
