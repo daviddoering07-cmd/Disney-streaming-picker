@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Streaming Picker</title>
-  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22%2Fstreaming-picker%2F%22%2C%22name%22%3A%22Streaming%20Picker%20-%20Disney%2B%20Zufallsgenerator%22%2C%22short_name%22%3A%22Streaming%20Picker%22%2C%22description%22%3A%22Finde%20den%20perfekten%20Film%20oder%20die%20perfekte%20Serie%20auf%20Disney%2B%20per%20Zufall.%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%230a0f1a%22%2C%22theme_color%22%3A%22%230072d2%22%2C%22categories%22%3A%5B%22entertainment%22%2C%22lifestyle%22%2C%22utilities%22%5D%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F3172%2F3172555.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+  <title>Disney+ Streaming Picker</title>
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22id%22%3A%22%2Fstreaming-picker%2F%22%2C%22name%22%3A%22Disney%2B%20Streaming%20Picker%22%2C%22short_name%22%3A%22Disney%2B%20Picker%22%2C%22description%22%3A%22Finde%20den%20perfekten%20Film%20oder%20die%20perfekte%20Serie%20auf%20Disney%2B%20per%20Zufall.%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%23040714%22%2C%22theme_color%22%3A%22%230078d4%22%2C%22categories%22%3A%5B%22entertainment%22%2C%22lifestyle%22%2C%22utilities%22%5D%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F3172%2F3172555.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
   <style>
     :root {
-      --bg-color: #0a0f1a;
-      --card-bg: #141b2b;
-      --accent-blue: #0072d2;
-      --accent-hover: #0086f8;
-      --text-main: #ffffff;
-      --text-muted: #8a9bb8;
-      --teal: #00d2d3;
+      --disney-dark: #040714;
+      --disney-card: #111b2e;
+      --disney-blue: #0078d4;
+      --disney-hover: #008efb;
+      --disney-glow: rgba(0, 120, 212, 0.4);
+      --text-main: #f9f9f9;
+      --text-muted: #cacaca;
     }
     body {
       margin: 0;
       padding: 20px;
-      background-color: var(--bg-color);
+      background: radial-gradient(circle at center top, #1a233a 0%, var(--disney-dark) 100%);
       color: var(--text-main);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       display: flex;
@@ -29,46 +29,51 @@
     }
     .container {
       width: 100%;
-      max-width: 480px;
+      max-width: 440px;
     }
     header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     header h1 {
       margin: 0 0 6px 0;
-      font-size: 26px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: linear-gradient(90deg, #ffffff, #8ac7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     header p {
       margin: 0;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 13px;
     }
     .card {
-      background-color: var(--card-bg);
+      background-color: var(--disney-card);
       padding: 24px;
-      border-radius: 20px;
-      border: 1px solid #26324b;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.7);
     }
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       position: relative;
     }
     label {
       display: block;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
       margin-bottom: 8px;
       color: var(--text-muted);
     }
     .type-toggle {
       display: flex;
-      background: #0c111c;
+      background: #070b16;
       padding: 4px;
-      border-radius: 12px;
-      border: 1px solid #26324b;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
       gap: 4px;
     }
     .toggle-btn {
@@ -78,113 +83,121 @@
       color: var(--text-muted);
       border: none;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
     }
     .toggle-btn.active {
-      background-color: var(--accent-blue);
+      background-color: var(--disney-blue);
       color: #ffffff;
+      box-shadow: 0 0 12px var(--disney-glow);
     }
     input[type="text"] {
       width: 100%;
       padding: 12px 14px;
-      background-color: #0c111c;
-      border: 1px solid #26324b;
+      background-color: #070b16;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       color: var(--text-main);
-      font-size: 15px;
+      font-size: 14px;
       outline: none;
       box-sizing: border-box;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
     input[type="text"]:focus {
-      border-color: var(--accent-blue);
+      border-color: var(--disney-blue);
+      box-shadow: 0 0 8px var(--disney-glow);
     }
     .suggestions-box {
       position: absolute;
       top: 100%;
       left: 0;
       right: 0;
-      background-color: #0c111c;
-      border: 1px solid #26324b;
+      background-color: #0d1424;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 0 0 10px 10px;
       max-height: 180px;
       overflow-y: auto;
       z-index: 100;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
     }
     .suggestion-item {
       padding: 10px 14px;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-main);
       cursor: pointer;
-      border-bottom: 1px solid #1a2235;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
     .suggestion-item:hover {
-      background-color: var(--accent-blue);
+      background-color: var(--disney-blue);
     }
     #drawBtn {
       width: 100%;
       padding: 14px;
-      background-color: var(--accent-blue);
+      background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
       color: white;
       border: none;
-      border-radius: 12px;
-      font-size: 16px;
+      border-radius: 10px;
+      font-size: 15px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 6px;
-      transition: background-color 0.2s, transform 0.1s;
+      margin-top: 4px;
+      box-shadow: 0 4px 14px var(--disney-glow);
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
     }
     #drawBtn:hover {
-      background-color: var(--accent-hover);
+      background: linear-gradient(135deg, #008efb 0%, #0078d4 100%);
+      box-shadow: 0 6px 20px rgba(0, 142, 251, 0.6);
     }
     #drawBtn:active {
       transform: scale(0.98);
     }
     .result-box {
-      margin-top: 24px;
-      padding: 20px;
-      background-color: #0f1523;
-      border: 2px solid var(--teal);
-      border-radius: 14px;
+      margin-top: 22px;
+      padding: 18px;
+      background-color: #070b16;
+      border: 1px solid var(--disney-blue);
+      border-radius: 12px;
       text-align: center;
-      animation: popIn 0.3s ease-out;
+      box-shadow: 0 0 16px rgba(0, 120, 212, 0.2);
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .hidden {
       display: none;
     }
     .badge {
       display: inline-block;
-      background-color: var(--teal);
-      color: #000;
-      font-size: 11px;
+      background-color: var(--disney-blue);
+      color: #fff;
+      font-size: 10px;
       font-weight: bold;
-      padding: 4px 8px;
+      padding: 3px 8px;
       border-radius: 4px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     .result-box h2 {
       margin: 0 0 4px 0;
-      font-size: 22px;
+      font-size: 20px;
+      color: #ffffff;
     }
     .subtitle {
-      margin: 0 0 14px 0;
-      font-size: 13px;
+      margin: 0 0 12px 0;
+      font-size: 12px;
       color: var(--text-muted);
       font-style: italic;
     }
     .meta-info {
       text-align: left;
-      font-size: 13px;
-      border-top: 1px solid #243048;
-      padding: 12px 0;
-      color: #c5d1e8;
+      font-size: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 10px;
+      color: #d0dbe7;
     }
     .meta-info p {
-      margin: 4px 0;
+      margin: 3px 0;
     }
     .stream-btn {
       display: flex;
@@ -192,13 +205,13 @@
       justify-content: center;
       gap: 8px;
       margin-top: 14px;
-      padding: 13px;
-      background: linear-gradient(135deg, #0072d2 0%, #00d2d3 100%);
+      padding: 12px;
+      background: linear-gradient(135deg, #0078d4 0%, #00d2d3 100%);
       color: white;
       text-decoration: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: bold;
-      font-size: 15px;
+      font-size: 14px;
       border: none;
       cursor: pointer;
       width: 100%;
@@ -218,8 +231,8 @@
 
   <div class="container">
     <header>
-      <h1>🎬 Streaming Picker</h1>
-      <p>Wähle Typ & Genre für deinen Zufallstreffer</p>
+      <h1>✨ Disney+ Picker</h1>
+      <p>Dein persönlicher Streaming-Zufallsgenerator</p>
     </header>
 
     <main class="card">
@@ -238,7 +251,7 @@
         <div id="genreSuggestions" class="suggestions-box hidden"></div>
       </div>
 
-      <button id="drawBtn">🎲 Zufälligen Film finden</button>
+      <button id="drawBtn">🎲 Zufälligen Titel finden</button>
 
       <div id="resultContainer" class="result-box hidden">
         <span class="badge" id="resType">FILM</span>
@@ -258,12 +271,9 @@
   </div>
 
   <script>
-    // Service Worker registrieren
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-          .then(reg => console.log('Service Worker registriert:', reg.scope))
-          .catch(err => console.log('Service Worker Fehler:', err));
+        navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed:', err));
       });
     }
 
@@ -341,7 +351,7 @@
       const matches = allGenres.filter(g => g.toLowerCase().includes(query));
 
       if (matches.length === 0) {
-        suggestionsBox.innerHTML = '<div class="suggestion-item" style="color: #8a9bb8;">Kein Genre gefunden</div>';
+        suggestionsBox.innerHTML = '<div class="Suggestion-item" style="color: #cacaca; padding: 10px 14px;">Kein Genre gefunden</div>';
         suggestionsBox.classList.remove('hidden');
         return;
       }
@@ -404,7 +414,7 @@
 
       document.getElementById('resType').textContent = (pick['Typ (Film / Serie)'] || 'TITEL').toUpperCase();
       document.getElementById('resTitle').textContent = currentTitle;
-      document.getElementById('resOriginal').textContent = pick['Originaltitel / International'] ? `Original: ${pick['Originaltientel / International'] || pick['Originaltitel / International']}` : '';
+      document.getElementById('resOriginal').textContent = pick['Originaltitel / International'] ? `Original: ${pick['Originaltitel / International']}` : '';
       document.getElementById('resStudio').textContent = pick['Franchise / Studio'] || '-';
       document.getElementById('resGenre').textContent = pick['Genre / Kategorie'] || '-';
 
